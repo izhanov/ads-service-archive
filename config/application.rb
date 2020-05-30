@@ -4,6 +4,7 @@ require "sinatra/activerecord"
 require "sinatra/base"
 require "sinatra/contrib"
 require "dry/monads"
+require "dry/validation"
 
 class Application < Sinatra::Base
   include Dry::Monads[:result]

@@ -3,5 +3,5 @@
 require_relative "./config/environment"
 
 map "/ads" do
-  run AdvertisingsRoutes.new
+  run AdsRoutes.new
 end

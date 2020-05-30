@@ -17,6 +17,8 @@ module Boot
 
   def require_app
     require File.join(root, "config/application")
+    require File.join(root, "app/services/operations/base")
+    require File.join(root, "app/services/validations/base")
     Dir["#{root}/app/**/*.rb"].each { |file| require file }
   end
 
