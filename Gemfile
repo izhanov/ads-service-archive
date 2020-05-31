@@ -19,8 +19,13 @@ gem "sinatra", require: "sinatra/base"
 gem "sinatra-activerecord", require: "sinatra/activerecord"
 gem "sinatra-contrib"
 
+group :development, :test do
+  gem "byebug", platforms: %i[mri mingw x64_mingw]
+end
+
 group :test do
   gem "database_cleaner-active_record"
+  gem "factory_bot"
   gem "rack-test"
   gem "rspec"
 end
