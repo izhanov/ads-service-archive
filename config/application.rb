@@ -9,6 +9,10 @@ require "dry/validation"
 class Application < Sinatra::Base
   include Dry::Monads[:result]
 
+  configure do
+    set :app_file, File.expand_path("../config.ru", __dir__)
+  end
+
   configure :development do
     register Sinatra::Reloader
 
