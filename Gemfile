@@ -20,6 +20,7 @@ gem "sinatra-activerecord", require: "sinatra/activerecord"
 gem "sinatra-contrib"
 
 group :test do
+  gem "database_cleaner-active_record"
   gem "rack-test"
   gem "rspec"
 end
