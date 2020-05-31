@@ -19,6 +19,8 @@ module Boot
     require File.join(root, "config/application")
     require File.join(root, "app/services/operations/base")
     require File.join(root, "app/services/validations/base")
+    require File.join(root, "app/services/utils/ad_serializer")
+    require File.join(root, "app/helpers/pagination_links")
     Dir["#{root}/app/**/*.rb"].each { |file| require file }
   end
 
