@@ -5,7 +5,7 @@ module Operations
     class Create < Operations::Base
       def call(params)
         validated_params = yield validate(params)
-        resource = yield commit(validated_params)
+        resource = yield commit(validated_params.to_h)
         Success(resource)
       end
 
@@ -17,7 +17,7 @@ module Operations
       end
 
       def commit(params)
-        resource = Ad.create(params)
+        resource = Ad.create!(params)
         Success(resource)
       end
     end
