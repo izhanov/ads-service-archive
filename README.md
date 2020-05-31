@@ -9,6 +9,8 @@
 - ActiveRecord `6.0.0+`
 - Puma `4.3+`
 - PostgreSQL `9.5+`
+- dry-monads `1.3.5`
+- dry-validation `1.5.0`
 
 # Установка и запуск приложения
 
