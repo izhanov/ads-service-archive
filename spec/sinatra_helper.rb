@@ -24,7 +24,7 @@ require "byebug"
 RSpec.configure do |config|
   config.include Rack::Test::Methods
   config.include Features::RoutesHelper
-
+  config.include Features::ClientHelper, type: :client
   config.include FactoryBot::Syntax::Methods
 
   config.before(:suite) do
