@@ -6,6 +6,8 @@ require "sinatra/contrib"
 require "dry/monads"
 require "dry/validation"
 require "fast_jsonapi"
+require "faraday"
+require "faraday_middleware"
 
 class Application < Sinatra::Base
   include Dry::Monads[:result]
