@@ -4,10 +4,10 @@ module Validations
   module Ads
     class Create < Validations::Base
       params do
-        required(:title).value(:string)
-        required(:description).value(:string)
-        required(:city).value(:string)
-        required(:user_id).value(:integer)
+        required(:title).filled(:string)
+        required(:description).filled(:string)
+        required(:city).filled(:string)
+        required(:user_id).filled(:integer)
         optional(:lat).value(:float)
         optional(:lon).value(:float)
       end
