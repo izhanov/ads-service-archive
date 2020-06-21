@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
+require "byebug"
+
 class AdsRoutes < Application
   helpers Helpers::PaginationLinks
+  helpers Helpers::Auth
 
   namespace "/v1" do
     get do
@@ -12,7 +15,8 @@ class AdsRoutes < Application
 
     post "/create" do
       operation = Operations::Ads::Create.new
-      result = operation.call(params)
+
+      result = operation.call(params.merge(user_id: user_id))
 
       case result
       when Success
@@ -23,6 +27,9 @@ class AdsRoutes < Application
         status 422
         json(result.failure)
       end
+    rescue Helpers::Auth::Unauthorized
+      status 403
+      json(code: :authentication_error, payload: "Пользователь не аутентифицирован")
     end
   end
 end

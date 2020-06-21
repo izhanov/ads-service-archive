@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "sinatra_helper"
+require "byebug"
 
 RSpec.describe AdsRoutes, type: :routes do
   describe "GET /ads/v1" do
@@ -15,6 +16,21 @@ RSpec.describe AdsRoutes, type: :routes do
   end
 
   describe "POST /ads/v1/create" do
+    let(:user_id) { 1488 }
+    let(:auth_token) { "auth.token" }
+    let(:auth_service) { instance_double("Authentication::Client") }
+
+    before do
+      allow(auth_service).to receive(:auth)
+        .with(auth_token)
+        .and_return(user_id)
+
+      allow(Authentication::Client).to receive(:new)
+        .and_return(auth_service)
+
+      header "Authorization", "Bearer #{auth_token}"
+    end
+
     context "with missing params" do
       it "returns 422" do
         post "/v1/create"
@@ -26,9 +42,11 @@ RSpec.describe AdsRoutes, type: :routes do
       let(:params) { { title: "Title", description: "description" } }
       it "returns message with error" do
         post "/v1/create", params
+
         expect(response.status).to eq(422)
         expect(response.body).to include(
-          code: "validation_error", payload: {city: ["is missing"], user_id: ["is missing"]})
+          code: "validation_error", payload: { city: ["is missing"], }
+        )
       end
     end
 
@@ -36,17 +54,47 @@ RSpec.describe AdsRoutes, type: :routes do
       let(:params) {
         {
           title: "Title", description: "description",
-          city: "City", user_id: 78
+          city: "City"
         }
       }
 
       it "returns ad" do
         post "/v1/create", params
+
         expect(response.status).to eq(201)
         expect(response.body[:data]).to include(
           type: "ad",
           id: Ad.last.id.to_s
         )
+      end
+    end
+
+    context "when token invalid" do
+      let(:user_id) { nil }
+      let(:auth_token) { "auth.token" }
+      let(:auth_service) { instance_double("Authentication::Client") }
+
+      before do
+        allow(auth_service).to receive(:auth)
+          .with(auth_token)
+          .and_return(user_id)
+
+        allow(Authentication::Client).to receive(:new)
+          .and_return(auth_service)
+
+        header "Authorization", "Bearer #{auth_token}"
+      end
+      let(:params) {
+        {
+          title: "Title", description: "description",
+          city: "City"
+        }
+      }
+
+      it "returns 403 error" do
+        post "/v1/create", params
+        expect(response.status).to eq(403)
+        expect(response.body).to include(code: "authentication_error", payload: "Пользователь не аутентифицирован")
       end
     end
   end
