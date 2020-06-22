@@ -2,7 +2,7 @@
 
 module Features
   module ClientHelper
-    def connecttion
+    def connection
       Faraday.new do |conn|
         conn.request :json
         conn.response :json, content_type: /\bjson$/

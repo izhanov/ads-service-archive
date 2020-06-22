@@ -3,7 +3,7 @@
 require "sinatra_helper"
 
 RSpec.describe Authentication::Client, type: :client do
-  subject { described_class.new(connection: connecttion)}
+  subject { described_class.new(connection: connection)}
 
   let(:status) { 201 }
   let(:headers) { {"Content-Type" => "application/json"}}

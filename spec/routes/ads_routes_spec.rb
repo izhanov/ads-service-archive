@@ -58,6 +58,14 @@ RSpec.describe AdsRoutes, type: :routes do
         }
       }
 
+      let(:coordinates) { { lat: 43.555, lon: 42.235 } }
+
+      before do
+        allow(Geocoder::Determine.new).to receive(:call)
+          .with(params[:city])
+          .and_return(coordinates)
+      end
+
       it "returns ad" do
         post "/v1/create", params
 

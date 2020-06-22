@@ -2,6 +2,6 @@
 
 module Operations
   class Base
-    include Dry::Monads[:result, :do]
+    include Dry::Monads[:result, :do, :try]
   end
 end
