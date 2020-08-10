@@ -8,8 +8,6 @@ module Validations
         required(:description).filled(:string)
         required(:city).filled(:string)
         required(:user_id).filled(:integer)
-        optional(:lat).value(:float)
-        optional(:lon).value(:float)
       end
     end
   end

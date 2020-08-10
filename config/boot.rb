@@ -23,11 +23,11 @@ module Boot
     require File.join(root, "app/services/operations/base")
     require File.join(root, "app/services/validations/base")
     require File.join(root, "app/services/utils/ad_serializer")
-    Dir["#{root}/app/**/*.rb"].each { |file| require file }
+    Dir["#{root}/app/**/*.rb"].sort.each { |file| require file }
   end
 
   def initialize_app
-    Dir["#{root}/config/initializer/**/*.rb"].each { |file| require file }
+    Dir["#{root}/config/initializer/**/*.rb"].sort.each { |file| require file }
   end
 
   def root

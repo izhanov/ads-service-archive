@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
+require "bunny"
 require "sinatra/activerecord"
 require "sinatra/base"
 require "sinatra/contrib"
 require "dry/monads"
+require "dry/monads/result"
 require "dry/validation"
 require "fast_jsonapi"
 require "faraday"

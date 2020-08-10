@@ -6,6 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "2.7.0"
 
 gem "activerecord", require: "active_record"
+gem "bunny", "~> 2.15.0"
 gem "dotenv"
 gem "dry-monads"
 gem "dry-validation"
