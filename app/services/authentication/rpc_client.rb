@@ -9,7 +9,7 @@ module Authentication
     def initialize
       @channel = create_channel
       @queue = @channel.queue("authentication", durable: true)
-      @reply_queue = @channel.queue("ads.reply-to")
+      @reply_queue = @channel.queue("authentication.reply-to")
       @lock = Mutex.new
       @condition = ConditionVariable.new
       @correlation_id = SecureRandom.uuid
