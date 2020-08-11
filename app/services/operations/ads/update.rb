@@ -18,7 +18,6 @@ module Operations
 
       def commit(params)
         resource = Ad.find(params[:id])
-        puts resource
         resource.update(lat: params[:lat], lon: params[:lon])
         Success(resource)
       rescue ActiveRecord::RecordNotFound
