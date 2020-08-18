@@ -1,17 +1,18 @@
 # frozen_string_literal: true
 
-require "bunny"
-require "sinatra/activerecord"
 require "sinatra/base"
 require "sinatra/contrib"
+require "sinatra/custom_logger"
+require "rack/ougai"
 require "dry/monads"
 require "dry/monads/result"
 require "dry/validation"
-require "fast_jsonapi"
-require "faraday"
-require "faraday_middleware"
+require "dry/schema/messages/i18n"
+
 
 class Application < Sinatra::Base
+  helpers Sinatra::CustomLogger
+
   include Dry::Monads[:result]
 
   configure do

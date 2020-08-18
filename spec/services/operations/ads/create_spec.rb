@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "sinatra_helper"
-
 RSpec.describe Operations::Ads::Create, type: :service do
   describe "#call" do
     let(:params) {

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "sinatra_helper"
-
 RSpec.describe Authentication::Client, type: :client do
   subject { described_class.new(connection: connection)}
 

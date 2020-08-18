@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "sinatra_helper"
-
 RSpec.describe Validations::Ads::Create, type: :service do
   it "requires title" do
     expect(subject.call({}).errors.to_h).to include(title: ["is missing"])

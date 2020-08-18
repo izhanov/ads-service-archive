@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "sinatra_helper"
-
 RSpec.describe Geocoder::Determine, type: :client do
   describe "#call" do
     context "when city can't be determine" do

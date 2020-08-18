@@ -15,14 +15,18 @@ module Helpers
 
     private
 
+    # def auth_service
+    #   @auth_service ||= Authentication::RpcClient.fetch
+    # end
+
     def auth_service
-      @auth_service ||= Authentication::RpcClient.fetch
+      @auth_service ||= Authentication::Client.new
     end
 
     def matched_token
       result = auth_header&.match(AUTH_TOKEN)
       return if result.blank?
-
+      puts result[:token]
       result[:token]
     end
 
