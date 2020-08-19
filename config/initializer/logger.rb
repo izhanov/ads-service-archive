@@ -6,11 +6,14 @@ Application.configure do |app|
     level: "info"
   )
 
-  logger.before_log = lambda { |data| data[:service] = { name: ENV["APP_NAME"] }  }
+  logger.before_log = lambda do |data|
+    data[:service] = { name: ENV["APP_NAME"] }
+    data[:request_id] ||= Thread.current[:request_id]
+  end
   app.set :logger, logger
 end
 
-Application.configure :development do |app|
+Application.configure :test do |app|
   logger = Ougai::Logger.new(
     STDOUT,
     level: "info"

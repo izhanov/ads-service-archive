@@ -122,6 +122,7 @@ GEM
       rack (~> 2.0)
     rack-protection (2.0.8.1)
       rack
+    rack-request-id (0.0.4)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails-dom-testing (2.0.3)
@@ -182,7 +183,8 @@ DEPENDENCIES
   kaminari
   pg
   puma
-  rack-ougai
+  rack-ougai (~> 0.2.1)
+  rack-request-id (~> 0.0.4)
   rack-test
   rake
   rspec
