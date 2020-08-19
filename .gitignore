@@ -2,3 +2,5 @@
 /.env.development
 /.env.test
 /config/database.yml
+/log/app.log
+!/log/.keep

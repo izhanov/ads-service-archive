@@ -3,7 +3,7 @@
 module Authentication
   module RpcApi
     def auth(token)
-      payload = { token: "Bearer #{token}" }.to_json
+      payload = { token: token }.to_json
       publish(payload, type: "token")
     end
   end

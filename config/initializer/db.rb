@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
-require "active_record"
-require "kaminari"
+Sequel.connect(ENV["DATABASE_URL"]) # DB object
 
-ActiveRecord::Base.establish_connection(
-  ENV["DATABASE_URL"]
-)
+Sequel::Model.db.extension(:pagination)
+Sequel::Model.plugin :timestamps, update_on_create: true
+Sequel::Model.plugin :dataset_associations
+
+Sequel.default_timezone = :utc

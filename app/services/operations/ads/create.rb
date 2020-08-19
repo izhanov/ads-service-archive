@@ -17,7 +17,7 @@ module Operations
       end
 
       def commit(params)
-        resource = Ad.create!(params)
+        resource = Ad.create(params)
         GeocoderService::Client.new.geocode_later(resource)
         Success(resource)
       end

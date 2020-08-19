@@ -9,7 +9,7 @@ module Authentication
     def initialize
       @channel = create_channel
       @queue = @channel.queue("authentication", durable: true)
-      @reply_queue = @channel.queue("ads.reply-to")
+      @reply_queue = @channel.queue("amq.rabbitmq.reply-to")
       @lock = Mutex.new
       @condition = ConditionVariable.new
       @correlation_id = SecureRandom.uuid
@@ -20,11 +20,13 @@ module Authentication
     end
 
     def start
-      @reply_queue.subscribe(manual_ack: true) do |delivery_info, properties, payload|
+      @reply_queue.subscribe do |delivery_info, properties, payload|
         if @correlation_id == properties[:correlation_id]
           @user_id = JSON.parse(payload).dig("user_id")
           @delivery_tag = delivery_info.delivery_tag
-          @lock.synchronize { @condition.signal }
+          @lock.synchronize do
+            @condition.signal
+          end
         end
       end
 
@@ -40,13 +42,13 @@ module Authentication
           opts.merge(
             app_id: "ads",
             correlation_id: @correlation_id,
-            reply_to: @reply_queue.name
+            reply_to: @reply_queue.name,
+            headers: {
+              request_id: Thread.current[:request_id]
+            }
           )
         )
         @condition.wait(@lock)
-
-        @reply_queue.channel.ack(@delivery_tag)
-
         @user_id
       end
     end

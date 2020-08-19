@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require "sinatra_helper"
-require "byebug"
-
 RSpec.describe AdsRoutes, type: :routes do
   describe "GET /ads/v1" do
     let!(:ads) { create_list(:ad, 3) }

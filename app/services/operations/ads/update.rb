@@ -17,11 +17,10 @@ module Operations
       end
 
       def commit(params)
-        resource = Ad.find(params[:id])
-        puts resource
+        resource = Ad.with_pk!(params[:id])
         resource.update(lat: params[:lat], lon: params[:lon])
         Success(resource)
-      rescue ActiveRecord::RecordNotFound
+      rescue Sequel::NoMatchingRow
         Failure(:record_not_found)
       end
     end

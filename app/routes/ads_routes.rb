@@ -8,8 +8,10 @@ class AdsRoutes < Application
 
   namespace "/v1" do
     get do
-      ads = Ad.order(created_at: :desc).page(params[:page])
-      serialized_ads = Utils::AdSerializer.new(ads, links: pagination_links(ads))
+      page = params[:page].presence || 1
+      ads = Ad.reverse_order(:updated_at)
+      ads = ads.paginate(page.to_i, 15)
+      serialized_ads = Utils::AdSerializer.new(ads.all, links: pagination_links(ads))
       json(serialized_ads.serializable_hash)
     end
 

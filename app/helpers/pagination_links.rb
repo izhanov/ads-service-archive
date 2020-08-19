@@ -3,11 +3,11 @@
 module Helpers
   module PaginationLinks
     def pagination_links(scope)
-      return {} if scope.total_pages.zero?
+      return {} if scope.pagination_record_count.zero?
 
       links = {
         first: pagination_link(page: 1),
-        last: pagination_link(page: scope.total_pages)
+        last: pagination_link(page: scope.page_count)
       }
 
       links[:next] = pagination_link(page: scope.next_page) if scope.next_page.present?

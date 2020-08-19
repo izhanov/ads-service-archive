@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "2.7.0"
 
-gem "activerecord", require: "active_record"
+gem "amazing_print"
 gem "bunny", "~> 2.15.0"
 gem "dotenv"
 gem "dry-monads"
@@ -17,9 +17,11 @@ gem "i18n"
 gem "kaminari"
 gem "pg"
 gem "puma"
+gem "rack-ougai", "~> 0.2.1"
+gem "rack-request-id", "~> 0.0.4"
 gem "rake"
+gem "sequel", "~> 5.32.0"
 gem "sinatra", require: "sinatra/base"
-gem "sinatra-activerecord", require: "sinatra/activerecord"
 gem "sinatra-contrib"
 
 group :development, :test do
@@ -27,7 +29,7 @@ group :development, :test do
 end
 
 group :test do
-  gem "database_cleaner-active_record"
+  gem "database_cleaner-sequel"
   gem "factory_bot"
   gem "rack-test"
   gem "rspec"

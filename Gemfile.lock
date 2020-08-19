@@ -18,6 +18,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
+    amazing_print (1.2.1)
     amq-protocol (2.3.1)
     backports (3.17.2)
     builder (3.2.4)
@@ -27,9 +28,9 @@ GEM
     concurrent-ruby (1.1.6)
     crass (1.0.6)
     database_cleaner (1.8.5)
-    database_cleaner-active_record (1.8.0)
-      activerecord
+    database_cleaner-sequel (1.8.0)
       database_cleaner (~> 1.8.0)
+      sequel
     diff-lcs (1.3)
     dotenv (2.7.5)
     dry-configurable (0.11.5)
@@ -109,12 +110,19 @@ GEM
     nio4r (2.5.2)
     nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
+    oj (3.10.8)
+    ougai (1.8.5)
+      oj (~> 3.10)
     pg (1.2.3)
     puma (4.3.5)
       nio4r (~> 2.0)
-    rack (2.2.3)
+    rack (2.2.2)
+    rack-ougai (0.2.1)
+      ougai (~> 1.5)
+      rack (~> 2.0)
     rack-protection (2.0.8.1)
       rack
+    rack-request-id (0.0.4)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails-dom-testing (2.0.3)
@@ -137,14 +145,12 @@ GEM
       rspec-support (~> 3.9.0)
     rspec-support (3.9.3)
     ruby2_keywords (0.0.2)
+    sequel (5.32.0)
     sinatra (2.0.8.1)
       mustermann (~> 1.0)
       rack (~> 2.0)
       rack-protection (= 2.0.8.1)
       tilt (~> 2.0)
-    sinatra-activerecord (2.0.18)
-      activerecord (>= 4.1)
-      sinatra (>= 1.0)
     sinatra-contrib (2.0.8.1)
       backports (>= 2.8.2)
       multi_json
@@ -162,10 +168,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord
+  amazing_print
   bunny (~> 2.15.0)
   byebug
-  database_cleaner-active_record
+  database_cleaner-sequel
   dotenv
   dry-monads
   dry-validation
@@ -177,11 +183,13 @@ DEPENDENCIES
   kaminari
   pg
   puma
+  rack-ougai (~> 0.2.1)
+  rack-request-id (~> 0.0.4)
   rack-test
   rake
   rspec
+  sequel (~> 5.32.0)
   sinatra
-  sinatra-activerecord
   sinatra-contrib
 
 RUBY VERSION
